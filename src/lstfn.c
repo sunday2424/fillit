@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:59:55 by junpark           #+#    #+#             */
-/*   Updated: 2019/04/15 17:11:35 by junpark          ###   ########.fr       */
+/*   Updated: 2019/04/30 10:43:29 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,24 @@ t_list	*free_list(t_list *list)
 		list = next;
 	}
 	return (NULL);
+}
+
+char	**tet_memalloc(size_t y, size_t x)
+{
+	char	**ptr;
+	size_t	i;
+
+	i = 0;
+	ptr = (char**)malloc(sizeof(char *) * (y + 1));
+	if (!ptr)
+		return (0);
+	while (i < y + 1)
+	{
+		ptr[i] = (char *)malloc(sizeof(char) * x + 1);
+		if (!ptr[i])
+			return (0);
+		ft_memset(ptr[i], 0, (sizeof(char) * x + 1));
+		i++;
+	}
+	return (ptr);
 }
