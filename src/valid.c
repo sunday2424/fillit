@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:01:20 by junpark           #+#    #+#             */
-/*   Updated: 2019/04/15 16:57:30 by junpark          ###   ########.fr       */
+/*   Updated: 2019/04/30 10:04:38 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,16 +119,16 @@ int			check_map(char *str, int count)
 			if (!(str[i] == '#' || str[i] == '.'))
 				return (1);
 			if (str[i] == '#' && ++blocks > 4)
-				return (2);
+				return (1);
 		}
 		else if (str[i] != '\n')
-			return (3);
+			return (1);
 		i++;
 	}
 	if (count == 21 && str[20] != '\n')
-		return (4);
+		return (1);
 	if (!valid_tetris(str))
-		return (5);
+		return (1);
 	return (0);
 }
 
