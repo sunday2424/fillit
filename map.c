@@ -5,12 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/30 10:35:34 by junpark           #+#    #+#             */
-/*   Updated: 2019/04/30 12:57:04 by junpark          ###   ########.fr       */
+/*   Created: 2019/04/09 23:22:15 by junpark           #+#    #+#             */
+/*   Updated: 2019/05/08 09:35:11 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+** A function to get a width/length of a square (sqrt)
+*/
+
+int		get_min_map(t_tet *tetlist)
+{
+	t_tet	*tmplst;
+	int		numoftet;
+	int		i;
+
+	i = 2;
+	tmplst = tetlist;
+	while (tmplst->next)
+		tmplst = tmplst->next;
+	numoftet = (tmplst->alpha) + 1;
+	while ((i * i) < (numoftet * 4))
+		i++;
+	return (i);
+}
+
+/*
+** Allocate memory for a new empty map.
+*/
 
 t_map	*new_map(int size)
 {
@@ -21,8 +45,8 @@ t_map	*new_map(int size)
 	map = (t_map *)ft_memalloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
-	map->array = (char **)tet_memalloc((size_t)size, (size_t)size);
-	if(!(map->array))
+	map->maparr = (char **)tet_memalloc((size_t)size, (size_t)size);
+	if (!(map->maparr))
 		return (NULL);
 	i = 0;
 	while (i < size)
@@ -30,41 +54,40 @@ t_map	*new_map(int size)
 		j = 0;
 		while (j < size)
 		{
-			(map->array)[i][j] = '.';
+			(map->maparr)[i][j] = '.';
 			j++;
 		}
-		(map->array)[i][j] = '\0';
+		(map->maparr)[i][j] = '\0';
 		i++;
 	}
-	(map->array)[i] = "\0";
-	map->size = size;
+	(map->maparr)[i] = "\0";
+	map->mapsize = size;
 	return (map);
 }
 
-void	free_map(t_map *map)
+void	tet_mapfree(t_map **alst)
 {
-	int	i;
+	t_map *tmp;
 
-	i = 0;
-	while (i < map->size)
+	if (!(*alst) || !alst)
+		return ;
+	while (*alst)
 	{
-		ft_memdel((void **)&(map->array[i]));
-		i++;
+		tmp = (*alst)->next;
+		free(*alst);
+		*alst = tmp;
 	}
-	ft_memdel((void **)&(map->array));
-	ft_memdel((void **)&map);
 }
 
-void	print_map(t_map *map)
+void	map_print(t_map **finalmap, int size)
 {
-	int i;
+	int j;
 
-	i = 0;
-	while(i < map->size)
+	j = 0;
+	while (j < size)
 	{
-		ft_putstr(map->array[i]);
+		ft_putstr(((*finalmap)->maparr)[j]);
 		ft_putchar('\n');
-		i++;
+		j++;
 	}
 }
-

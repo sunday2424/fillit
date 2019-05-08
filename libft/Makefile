@@ -6,7 +6,7 @@
 #    By: junpark <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/21 23:54:12 by junpark           #+#    #+#              #
-#    Updated: 2019/04/11 21:03:41 by junpark          ###   ########.fr        #
+#    Updated: 2019/05/07 11:06:50 by junpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,10 +94,10 @@ $(NAME):
 	@ranlib $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
