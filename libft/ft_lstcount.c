@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 21:00:48 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/08 09:10:47 by junpark          ###   ########.fr       */
+/*   Updated: 2019/04/11 21:01:45 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_lstcount(t_list *lst)
 	i = 0;
 	while (lst != NULL)
 	{
-		lst = lst->next;
+		lst	= lst->next;
 		i++;
 	}
 	return (i);

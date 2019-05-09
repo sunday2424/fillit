@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:30:14 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/08 09:09:22 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/07 22:03:44 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,51 @@
 # define FILLIT_H
 # include <string.h>
 # include <unistd.h>
-# include <fcntl.h>
 # include "libft/libft.h"
 
-# define X_VAL	5
-# define Y_VAL	5
-
-typedef struct		s_tet
+typedef struct	s_map
 {
-	char			**content;
-	struct s_tet	*next;
-	int				alpha;
-	int				width;
-	int				height;
-}					t_tet;
+	int			size;
+	char		**array;
+}				t_map;
 
-typedef struct		s_map
+typedef struct	s_position
 {
-	char			**maparr;
-	struct s_map	*next;
-	int				mapsize;
-}					t_map;
+	int			x;
+	int			y;
+}				t_position;
 
-typedef struct		s_coord
+typedef struct	s_tetris
 {
-	int				x;
-	int				y;
-}					t_coord;
+	char		**pos;
+	int			width;
+	int			height;
+	char		value;
+}				t_tetris;
 
-int					check_dot_sharp(char **arr);
-int					check_side(char **arr);
-int					check_val_tet(char **arr);
-int					store_tetriminos(int fd, t_tet **tetlist);
-int					initiate(char *file, t_tet **tetlist);
-char				**tet_memalloc(size_t y, size_t x);
-void				tet_memcpy(char **dst, char **src, size_t y, size_t x);
-void				tet_lstadd(t_tet **alst, t_tet *new);
-t_tet				*tet_lstnew(char **arr, int alph, int height, int width);
-void				tet_lstfree(t_tet **alst);
-void				tet_error();
-void				tet_cut(char **arr, t_tet **tetlist, int alph);
-int					tet_cut_left(char **arr);
-int					tet_cut_top(char **arr);
-int					tet_cut_bottom(char **arr);
-int					tet_cut_right(char **arr);
-int					check_n_store(char **arr,
-									t_tet **tetlist, int alph);
-int					get_min_map(t_tet *tetlist);
-t_map				*new_map(int size);
-int					tet_sqrt(double num);
-t_map				*tet_solve(t_tet *blocks);
-void				map_print(t_map **finalmap, int size);
-int					fit_valid(t_map *solution, t_tet *blocks);
-void				tet_mapfree(t_map **alst);
-t_coord				*point_new(int y, int x);
-int					place(t_tet *tetri, t_map *solution, int y, int x);
-void				set_piece(t_tet *tetri, \
-					t_map *solution, t_coord *coord, int c);
+void		get_size(char *str, t_position *min, t_position *max);
+t_tetris	*ext_tetris(char *str, char value);
+int			valid_tetris(char *str);
+int			check_map(char *str, int count);
+t_list		*read_maplst(int fd);
+
+void		free_tetris(t_tetris *tetris);
+t_tetris	*new_tetris(char **pos, int width, int height, char value);
+t_position	*new_position(int x, int y);
+
+void		free_map(t_map *map);
+void		print_map(t_map *map);
+t_map		*new_map(int size);
+int			get_min_map(int n);
+
+int			check_place(t_tetris *tetris, t_map *map, int x, int y);
+void		place_piece(t_tetris *tetris, t_map *map, \
+			t_position *position, char c);
+int			solve_map(t_map *map, t_list *list);
+t_map		*solve(t_list *list);
+
+size_t		ft_lstcount(t_list *lst);
+void		ft_lstrev(t_list **alst);
+t_list		*free_list(t_list *list);
 
 #endif
