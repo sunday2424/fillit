@@ -13,6 +13,11 @@
 #include "fillit.h"
 #include <fcntl.h>
 
+void print_error(void)
+{
+	ft_putstr("error\n");
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*list;
@@ -25,7 +30,7 @@ int	main(int ac, char **av)
 	}
 	if ((list = read_maplst(open(av[1], O_RDONLY))) == NULL)
 	{
-		ft_putstr("error\n");
+        print_error();
 		return (0);
 	}
 	map = solve(list);
