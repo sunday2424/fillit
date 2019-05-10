@@ -16,6 +16,7 @@
 void print_error(void)
 {
 	ft_putstr("error\n");
+	exit(0);
 }
 
 int	main(int ac, char **av)
@@ -28,7 +29,7 @@ int	main(int ac, char **av)
 		ft_putstr("usage: fillit input_file\n");
 		return (0);
 	}
-	if ((list = read_maplst(open(av[1], O_RDONLY))) == NULL)
+	if ((list = valid_input(open(av[1], O_RDONLY))) == NULL)
 	{
         print_error();
 		return (0);

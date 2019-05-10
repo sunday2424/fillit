@@ -23,20 +23,20 @@ typedef struct		s_map
 	struct s_map	*next;
 }					t_map;
 
-typedef struct		s_position
+typedef struct		s_pos
 {
 	int				x;
 	int				y;
-}					t_position;
+}					t_pos;
 
-typedef struct		s_tetris
+typedef struct		s_tet
 {
 	char			**pos;
 	int				width;
 	int				height;
 	char			value;
-	struct s_tetris	*next;
-}					t_tetris;
+	struct s_tet	*next;
+}					t_tet;
 
 /*
 void				get_size(char *str, t_position *min, t_position *max);
