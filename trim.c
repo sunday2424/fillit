@@ -87,18 +87,28 @@ int		left (char **map)
 	return (x);
 }
 
-char	**trim_tet (char **map)
+char	**trim_edge (char **map)
 {
 	char	**tmp;
+	int		i;
+	int		j;
 	int		x;
 	int		y;
 
 	y = 0;
-	tmp = (char **)malloc(sizeof(char *) * (bottom - top) + 1);
-	while (y < (bottom - top))
+	j = top(map);
+	tmp = (char **)malloc(sizeof(char *) * (bottom(map) - top(map)) + 1);
+	tmp[bottom(map) - top(map)] = NULL;
+	while (y < (bottom(map) - top(map)))
 	{
-		tmp[y] = (char *)malloc(sizeof(char) * (right - left) + 1);
+		x = 0;
+		i = left(map);
+		tmp[y] = (char *)malloc(sizeof(char) * (right(map) - left(map)) + 1);
+		tmp[y][right(map) - left(map)] = '\0';
+		while (x < (right(map) - left(map)))
+			tmp[y][x++] = map[j][i++];
 		y++;
+		j++;
 	}
 	return (tmp);
 }
