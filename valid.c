@@ -1,14 +1,21 @@
 #include "fillit.h"
 
-int		valid_input()
+int		valid_input(int fd)
 {
-	read(fd,)
+	char	**buffer;
+	int		y;
+	int		x;
+	int		
+
 }
 
-void	save_if_valid(int alp)
+void	save_if_valid(char **map, int alp)
 {
 	if (alp < 0 || alp >= 26)
 		print_error();
+	if (count_blocks(map))
+		if (count_connection(map))
+
 }
 
 int		count_blocks(char **map)

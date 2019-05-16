@@ -67,3 +67,12 @@ t_list	*free_list(t_list *list)
 	}
 	return (NULL);
 }
+
+void	ft_lstadd(t_list **alst, t_list *new)
+{
+	t_list	*elem;
+
+	elem = new;
+	elem->next = *alst;
+	*alst = elem;
+}

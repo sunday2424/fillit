@@ -23,19 +23,19 @@ typedef struct		s_map
 	struct s_map	*next;
 }					t_map;
 
-typedef struct		s_pos
+typedef struct		s_position
 {
 	int				x;
 	int				y;
-}					t_pos;
+}					t_position;
 
-typedef struct		s_tet
+typedef struct		s_tetris
 {
 	char			**pos;
 	int				width;
 	int				height;
 	char			value;
-	struct s_tet	*next;
+	struct s_tetris	*next;
 }					t_tet;
 
 /*
