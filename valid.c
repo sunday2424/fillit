@@ -1,12 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/17 18:44:12 by atropnik          #+#    #+#             */
+/*   Updated: 2019/05/17 23:18:42 by atropnik         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
-int		valid_input(int fd)
+t_tet	handle_input(char *file)
 {
-	char	**buffer;
-	int		y;
-	int		x;
-	int		
+	int		fd;
+	char	str[BUFF_SIZE + 1];
+	t_list	result;
+	int		bytesread;
 
+	fd = open(file, O_RDONLY);
+	bytesread = read(fd, str, BUFF_SIZE);
+	str[bytesread] = '\0';
+	return valid_input(fd, str);
+}
+
+t_tet	valid_input(int fd, char *str)
+{
+	t_tet	*list;
+	char	**array;
+	char	**tet;
+	char	alpha;
+	int		i;
+
+	if (!(array = ft_strsplit(str, '\n')))
+			return NULL;
+	if (!(count_blocks(array) && (count_connection(array))))
+		return NULL;
+	alpha = 64;
+	ft_lstnew(list);
+	while ((array != NULL) && (**array != '\n'))
+	{
+		alpha += 1;
+		tet = (char **)malloc(sizeof(char *) * 4 + 1);
+		i = -1;
+		while (++i <= 3)
+		{
+			tet[i] = ft_strnew(5);
+			tet[i] = *array;
+			array++;
+		}
+		list->str = new_tetris(tet, \
+				(right(temp) - left(temp)), (bottom(temp) - top(temp)), alpha);
+		free(tet);
+		array++;
+	// spit out a whole tetramino from big str and put each into new_tetris(trim(str))
+	// return valid t_tetris if everything is good	
+	}
+	if (**array == '\n')
+		return NULL;
+	else
+		return (list);
 }
 
 void	save_if_valid(char **map, int alp)

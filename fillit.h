@@ -15,6 +15,7 @@
 # include <string.h>
 # include <unistd.h>
 # include "libft/libft.h"
+# define BUFF_SIZE 545
 
 typedef struct		s_map
 {
@@ -31,7 +32,7 @@ typedef struct		s_position
 
 typedef struct		s_tetris
 {
-	char			**pos;
+	char			**str;
 	int				width;
 	int				height;
 	char			value;
@@ -39,7 +40,7 @@ typedef struct		s_tetris
 }					t_tet;
 
 /*
-void				get_size(char *str, t_position *min, t_position *max);
+void				get_size(char *str, t_ition *min, t_position *max);
 t_tetris			*ext_tetris(char *str, char value);
 int					valid_tetris(char *str);
 int					check_map(char *str, int count);

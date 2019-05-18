@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:56:28 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/07 16:21:29 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/17 22:13:50 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void	print_map(t_map *map)
 
 int		main(int ac, char **av)
 {
-	t_list	*list;
+	t_tet	*list;
 	t_map	*map;
 
 	if (ac == 2)
 	{
-		if ((list = valid_input(open(av[1], O_RDONLY))) == NULL)
+		if (list = handle_input(av[1]) == NULL)
 		{
 			print_error();
-			return (0);
+			return (1);
 		}
 		map = solve(list);
 		print_map(map);
@@ -52,7 +52,7 @@ int		main(int ac, char **av)
 	else
 	{
 		ft_putstr("usage: fillit input_file\n");
-		return (0);
+		return (1);
 	}
 	return (0);
 }
