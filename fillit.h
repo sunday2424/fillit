@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:30:14 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/07 22:03:44 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/18 23:21:06 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ char				**trim_edge(char **map);
 
 t_map				*new_map(int size);
 void				free_map(t_map *map);
-t_tet				*new_tetris(char **pos, int width, int height, char value);
+t_tet				*new_tetris(char **str, int width, int height, char value);
 void				free_tetris(t_tet *tetris);
 t_position			*new_position(int x, int y);
 
 size_t				tet_lstcount(t_tet *list);
 void				tet_lstprev(t_tet **alst);
 t_tet				*start_list(int num);
-void				add_to_list(t_tet **alst, t_tet *new);
+void				add_to_list(t_tet *alst, t_tet *new_list);
 
 int					check_place(int i, int j, t_tet *tetris, t_map *map);
 int					put_piece(t_tet *tetris, t_map *map, t_position *position, char c);

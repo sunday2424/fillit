@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:56:28 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/07 16:21:29 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/18 23:01:54 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int		main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		if ((list = handle_input(open(av[1], O_RDONLY))) == NULL)
+		list = handle_input(av[1]);
+		if (list == NULL)
 		{
 			print_error();
 			return (0);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   memfn.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/18 23:17:34 by atropnik          #+#    #+#             */
+/*   Updated: 2019/05/18 23:20:45 by atropnik         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 t_map	*new_map(int size)
@@ -40,12 +52,12 @@ void	free_map(t_map *map)
 	ft_memdel((void **)&map);
 }
 
-t_tet	*new_tetris(char **pos, int width, int height, char value)
+t_tet	*new_tetris(char **str, int width, int height, char value)
 {
 	t_tet	*tetris;
 
 	tetris = ft_memalloc(sizeof(t_tet));
-	tetris->str = pos;
+	tetris->str = str;
 	tetris->width = width;
 	tetris->height = height;
 	tetris->alpha = value;

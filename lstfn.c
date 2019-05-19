@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:59:55 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/07 23:50:56 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/19 00:41:45 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** required functions from libft.
 */
 
-size_t    tet_lstcount(t_tet *list)
+size_t	tet_lstcount(t_tet *list)
 {
     size_t i;
     
@@ -48,27 +48,42 @@ void    tet_lstprev(t_tet **alst)
     *alst = prev;
 }
 
-t_tet	*start_list(int num)
+t_tet	*start_list(int num, char **buf)
 {
 	t_tet		*new_list;
-	char		**tet;
+	t_tet		*curr;
+	char		**str
+	int			i;
+	char		alpha;
 
-	if (!(new_list = (t_tet*)malloc(sizeof(t_tet))))
-		return (NULL);
-	if (!(tet = (char **)malloc(sizeof(char *) * num + 1)))
-		return (NULL);
-	new_list->str = tet;
-	new_list->width = 0;
-	new_list->height = 0;
-	new_list->value = 'A';
-	new_list->next = NULL;
+	i = 0;
+	char = 'A';
+	while (i < num)
+	{
+		if (alpha == 'A')
+		{
+			new_list = new_tetris(str[i], (right(str[i]) - left(str[i])), \
+						(bottom(str[i]) - top(str[i]), alpha));
+			curr = beginning;
+		}
+		else
+		{
+			curr->next = new_tetris(str[i], \
+					(right(str[i]) - left(str[i])), \
+						(bottom(str[i]) - top(str[i]), alpha));
+			curr = curr->next;
+		}
+		i++;
+		alpha++;
+	}
+	curr->next = NULL;
 	return (new_list);
 }
 
-void	add_to_list(t_tet **alst, t_tet *new)
+void	add_to_list(t_tet *alst, t_tet *new_list)
 {
-	if (new == NULL)
+	if (new_list == NULL)
 		return ;
-	new->next = *alst;
-	*alst = new;
+	new_list->next = *alst;
+	*alst = new_list;
 }

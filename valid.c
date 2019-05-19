@@ -1,37 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/18 22:45:52 by atropnik          #+#    #+#             */
+/*   Updated: 2019/05/19 00:42:41 by atropnik         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
-t_tet	handle_input(char *file)
+t_tet	*handle_input(char *file)
 {
 	int		fd;
 	char	str[BUFF_SIZE + 1];
-	t_tet	*list;
 	int		bytesread;
 
-	list = start_list(4);
+	
 	fd = open(file, O_RDONLY);
 	bytesread = read(fd, str, BUFF_SIZE);
 	str[bytesread] = '\0';
-	return valid_input(str, list);
+	return valid_input(str);
 }
 
-t_tet	valid_input(char *str, t_tet *list)
+t_tet	*valid_input(char *str)
 {
 	char	**array;
 
 	if (!(array = ft_strsplit(str, '\n')) || ctbks(array) || ccon(array))
-			return NULL;
+		print_error();
 	else
-		return (save_if_valid(array, list));
+		return (save_if_valid(array));
 }
 
-t_tet	save_if_valid(char **array, t_tet list)
+t_tet	*save_if_valid(char **array)
 {
-	char	alpha;
-	char	**tet;
+	int		i;
 
-	alpha = 64;
+	i = 0;
+	while (*array)
+	{
+		i++;
+		array++;
+	}
+	return (start_list(i, array));
+	/*
 	if (!(tet = (char **)malloc(sizeof(char *) * 4 + 1)))
-		return NULL;
+		print_error();
 	tet[4] = NULL;
 	while ((array != NULL) && (**array != '\n'))
 	{
@@ -44,12 +61,14 @@ t_tet	save_if_valid(char **array, t_tet list)
 			tet++;
 		}
 		tet = trim_edge(tet);
-		add_to_list(&list, new_tetris(tet, (right(tet) \
+		add_to_list(&list, new_tetris(*tet, (right(tet) \
 					   - left(tet)), (bottom(tet) - top(tet)), alpha));
 		array++;
 	}
 	if ((**array == '\n') || alpha > 90)
-		return NULL;
+		print_error();
+	return (list);
+	*/
 }
 
 int		ctbks(char **map)
