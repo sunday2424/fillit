@@ -32,7 +32,7 @@ int		put_piece(t_tet *tetris, t_map *map, t_position *position, char c)
 		x = 0;
 		while (x < tetris->width)
 		{
-			if (tetris->position[x][y] == '#')
+			if (tetris->str[x][y] == '#')
 				map->array[position->y + y][position->x + x] = c;
 			x++;
 		}
@@ -73,7 +73,7 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 t_map	*solve(t_tet *tetlst)
 {
 	int		x;
-	t_map	map;
+	t_map	*map;
 
 	x = 4;
 	map = new_map(x);

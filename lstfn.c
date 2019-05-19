@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:59:55 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/19 00:41:45 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/19 01:48:56 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,28 @@ void    tet_lstprev(t_tet **alst)
     *alst = prev;
 }
 
-t_tet	*start_list(int num, char **buf)
+t_tet	*start_list(int num, char ***str)
 {
 	t_tet		*new_list;
 	t_tet		*curr;
-	char		**str
 	int			i;
 	char		alpha;
 
 	i = 0;
-	char = 'A';
+	alpha = 'A';
 	while (i < num)
 	{
 		if (alpha == 'A')
 		{
-			new_list = new_tetris(str[i], (right(str[i]) - left(str[i])), \
-						(bottom(str[i]) - top(str[i]), alpha));
-			curr = beginning;
+			new_list = new_tetris(trim(str[i]), (right(str[i]) - left(str[i])), \
+						(bottom(str[i]) - top(str[i])), alpha);
+			curr = new_list;
 		}
 		else
 		{
-			curr->next = new_tetris(str[i], \
+			curr->next = new_tetris(trim(str[i]), \
 					(right(str[i]) - left(str[i])), \
-						(bottom(str[i]) - top(str[i]), alpha));
+						(bottom(str[i]) - top(str[i])), alpha);
 			curr = curr->next;
 		}
 		i++;

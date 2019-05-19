@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 22:45:52 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/19 00:42:41 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/19 01:52:19 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ t_tet	*valid_input(char *str)
 	char	**array;
 
 	if (!(array = ft_strsplit(str, '\n')) || ctbks(array) || ccon(array))
+	{
 		print_error();
+		return NULL;
+	}
 	else
 		return (save_if_valid(array));
 }
@@ -38,37 +41,34 @@ t_tet	*valid_input(char *str)
 t_tet	*save_if_valid(char **array)
 {
 	int		i;
+	char	***grps_of_4;
+	char	**temp;
 
-	i = 0;
-	while (*array)
-	{
+	i = 0; 
+	while (array[i])
 		i++;
-		array++;
-	}
-	return (start_list(i, array));
-	/*
-	if (!(tet = (char **)malloc(sizeof(char *) * 4 + 1)))
-		print_error();
-	tet[4] = NULL;
-	while ((array != NULL) && (**array != '\n'))
+	grps_of_4 = (char ***)malloc(sizeof(char **) * ((i + 1) / 5));
+	temp = (char **)malloc(sizeof(char *) + 4);
+	i = 0;
+	while (*grps_of_4)
 	{
-		alpha += 1;
-		while (*tet)
+		if (((i + 1) % 5) == 0)
+			i++;
+		else
 		{
-			*tet = ft_strnew(5);
-			*tet = *array;
-			array++;
-			tet++;
+			while (*temp)
+			{
+				*temp = array[i];
+				i++;
+				temp++;
+			}
+			*grps_of_4 = temp;
+			grps_of_4++;
+			i++;
 		}
-		tet = trim_edge(tet);
-		add_to_list(&list, new_tetris(*tet, (right(tet) \
-					   - left(tet)), (bottom(tet) - top(tet)), alpha));
-		array++;
 	}
-	if ((**array == '\n') || alpha > 90)
-		print_error();
-	return (list);
-	*/
+	free (temp);
+	return (start_list(i, grps_of_4));
 }
 
 int		ctbks(char **map)

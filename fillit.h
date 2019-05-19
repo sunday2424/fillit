@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:30:14 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/18 23:21:06 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/19 01:45:19 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					top(char **map);
 int					bottom(char **map);
 int					right(char **map);
 int					left(char **map);
-char				**trim_edge(char **map);
+char				**trim(char **map);
 
 t_map				*new_map(int size);
 void				free_map(t_map *map);
@@ -60,7 +60,7 @@ t_position			*new_position(int x, int y);
 
 size_t				tet_lstcount(t_tet *list);
 void				tet_lstprev(t_tet **alst);
-t_tet				*start_list(int num, char **buf);
+t_tet				*start_list(int num, char ***str);
 void				add_to_list(t_tet *alst, t_tet *new_list);
 
 int					check_place(int i, int j, t_tet *tetris, t_map *map);
