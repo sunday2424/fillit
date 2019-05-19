@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 22:45:52 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/19 01:58:54 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/19 04:29:48 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,8 @@ t_tet	*valid_input(char *str)
 {
 	char	**array;
 
-	if (!(array = ft_strsplit(str, '\n')) || ctbks(array) || ccon(array))
-	{
-		print_error();
+	if (!(array = ft_strsplit(str, '\n')))
 		return NULL;
-	}
 	else
 		return (save_if_valid(array));
 }
@@ -41,34 +38,35 @@ t_tet	*valid_input(char *str)
 t_tet	*save_if_valid(char **array)
 {
 	int		i;
+	int		num;
 	char	***grps_of_4;
 	char	**temp;
 
 	i = 0; 
 	while (array[i])
 		i++;
-	grps_of_4 = (char ***)malloc(sizeof(char **) * ((i + 1) / 5));
-	temp = (char **)malloc(sizeof(char *) + 4);
+	grps_of_4 = (char ***)malloc(sizeof(char **) * (i / 4) + 1);
+	temp = (char **)malloc(sizeof(char *) * 4 + 1);
+	num = i;
 	i = 0;
-	while (*grps_of_4)
+	while (grps_of_4)
 	{
-		if (((i + 1) % 5) == 0)
-			i++;
-		else
+		while (temp)
 		{
-			while (*temp)
-			{
-				*temp = array[i];
-				i++;
-				temp++;
-			}
-			*grps_of_4 = temp;
-			grps_of_4++;
+			*temp = array[i];
 			i++;
+			if (i % 4 == 0)
+				break;	
+			(*temp)++; // failing to increment pointers correctly probs
 		}
+		*grps_of_4 = temp;
+		i++;
+		if (i >= num)
+			break;
+		(*grps_of_4)++; // and this one
 	}
 	free (temp);
-	return (start_list(i, grps_of_4));
+	return (start_list(num, grps_of_4));
 }
 
 int		ctbks(char **map)
@@ -81,17 +79,15 @@ int		ctbks(char **map)
 	y = 0;
 	d = 0;
 	s = 0;
-	while (y < 5)
+	while (y < 4)
 	{
 		x = 0;
-		while (x < 5)
+		while (x < 4)
 		{
 			if (map[y][x] == '.')
 				d++;
 			else if (map[y][x] == '#')
 				s++;
-			else if (map[y][x] != '\n')
-				print_error();
 			x++;
 		}
 		y++;

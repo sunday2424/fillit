@@ -6,7 +6,7 @@
 #    By: junpark <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/07 11:42:40 by junpark           #+#    #+#              #
-#    Updated: 2019/05/18 18:03:05 by junpark          ###   ########.fr        #
+#    Updated: 2019/05/19 02:11:20 by atropnik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INCLUDES = fillit.h
 
 $(NAME):
 	@make -C $(LIBFT)
-	@gcc -c -Wall -Werror -Wextra $(SRC) -I$(INCLUDES)
+	@gcc -c -Wall -Werror -Wextra -g $(SRC) -I$(INCLUDES)
 	@gcc $(OBJ) -L $(LIBFT) -o $(NAME)
 
 all: $(NAME)
