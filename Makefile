@@ -6,13 +6,13 @@
 #    By: junpark <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/07 11:42:40 by junpark           #+#    #+#              #
-#    Updated: 2019/05/07 16:25:56 by junpark          ###   ########.fr        #
+#    Updated: 2019/05/18 18:03:05 by junpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SRC = main.c lstfn.c solve.c blocks.c map.c valid.c
+SRC = main.c lstfn.c solve.c trim.c memfn.c valid.c
 
 OBJ = $(SRC:.c=.o)
 

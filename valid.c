@@ -1,78 +1,58 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   valid.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/17 18:44:12 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/17 23:18:42 by atropnik         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "fillit.h"
 
 t_tet	handle_input(char *file)
 {
 	int		fd;
 	char	str[BUFF_SIZE + 1];
-	t_list	result;
+	t_tet	*list;
 	int		bytesread;
 
+	list = start_list(4);
 	fd = open(file, O_RDONLY);
 	bytesread = read(fd, str, BUFF_SIZE);
 	str[bytesread] = '\0';
-	return valid_input(fd, str);
+	return valid_input(str, list);
 }
 
-t_tet	valid_input(int fd, char *str)
+t_tet	valid_input(char *str, t_tet *list)
 {
-	t_tet	*list;
 	char	**array;
-	char	**tet;
-	char	alpha;
-	int		i;
 
-	if (!(array = ft_strsplit(str, '\n')))
+	if (!(array = ft_strsplit(str, '\n')) || ctbks(array) || ccon(array))
 			return NULL;
-	if (!(count_blocks(array) && (count_connection(array))))
-		return NULL;
+	else
+		return (save_if_valid(array, list));
+}
+
+t_tet	save_if_valid(char **array, t_tet list)
+{
+	char	alpha;
+	char	**tet;
+
 	alpha = 64;
-	ft_lstnew(list);
+	if (!(tet = (char **)malloc(sizeof(char *) * 4 + 1)))
+		return NULL;
+	tet[4] = NULL;
 	while ((array != NULL) && (**array != '\n'))
 	{
 		alpha += 1;
-		tet = (char **)malloc(sizeof(char *) * 4 + 1);
-		i = -1;
-		while (++i <= 3)
+		while (*tet)
 		{
-			tet[i] = ft_strnew(5);
-			tet[i] = *array;
+			*tet = ft_strnew(5);
+			*tet = *array;
 			array++;
+			tet++;
 		}
-		list->str = new_tetris(tet, \
-				(right(temp) - left(temp)), (bottom(temp) - top(temp)), alpha);
-		free(tet);
+		tet = trim_edge(tet);
+		add_to_list(&list, new_tetris(tet, (right(tet) \
+					   - left(tet)), (bottom(tet) - top(tet)), alpha));
 		array++;
-	// spit out a whole tetramino from big str and put each into new_tetris(trim(str))
-	// return valid t_tetris if everything is good	
 	}
-	if (**array == '\n')
+	if ((**array == '\n') || alpha > 90)
 		return NULL;
-	else
-		return (list);
 }
 
-void	save_if_valid(char **map, int alp)
-{
-	if (alp < 0 || alp >= 26)
-		print_error();
-	if (count_blocks(map))
-		if (count_connection(map))
-
-}
-
-int		count_blocks(char **map)
+int		ctbks(char **map)
 {
 	int x;
 	int y;
@@ -100,7 +80,7 @@ int		count_blocks(char **map)
 	return ((d == 12 && s == 4) ? 1 : 0);
 }
 
-int		count_connection(char **map)
+int		ccon(char **map)
 {
 	int	x;
 	int	y;

@@ -61,7 +61,7 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 				if(rec_backtrack(map, tetlst->next))
 					return (0);
 				else
-					put_piece(tetris, map, new_position(x, y), '.')
+					put_piece(tetris, map, new_position(x, y), '.');
 			}
 			x++;
 		}

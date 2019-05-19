@@ -6,12 +6,11 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:56:28 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/17 22:13:50 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:21:29 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <fcntl.h>
 
 void	print_error(void)
 {
@@ -39,20 +38,20 @@ int		main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		if (list = handle_input(av[1]) == NULL)
+		if ((list = handle_input(open(av[1], O_RDONLY))) == NULL)
 		{
 			print_error();
-			return (1);
+			return (0);
 		}
 		map = solve(list);
 		print_map(map);
 		free_map(map);
-		free_list(list);
+		free_tetris(list);
 	}
 	else
 	{
 		ft_putstr("usage: fillit input_file\n");
-		return (1);
+		return (0);
 	}
 	return (0);
 }

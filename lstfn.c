@@ -48,3 +48,27 @@ void    tet_lstprev(t_tet **alst)
     *alst = prev;
 }
 
+t_tet	*start_list(int num)
+{
+	t_tet		*new_list;
+	char		**tet;
+
+	if (!(new_list = (t_tet*)malloc(sizeof(t_tet))))
+		return (NULL);
+	if (!(tet = (char **)malloc(sizeof(char *) * num + 1)))
+		return (NULL);
+	new_list->str = tet;
+	new_list->width = 0;
+	new_list->height = 0;
+	new_list->value = 'A';
+	new_list->next = NULL;
+	return (new_list);
+}
+
+void	add_to_list(t_tet **alst, t_tet *new)
+{
+	if (new == NULL)
+		return ;
+	new->next = *alst;
+	*alst = new;
+}

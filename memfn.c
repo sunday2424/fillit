@@ -19,8 +19,10 @@ t_map	*new_map(int size)
 			map->array[i][j] = '.';
 			j++;
 		}
+		map->array[i][j] = '\0';
 		i++;
 	}
+	map->array[i] = NULL;
 	return (map);
 }
 
@@ -38,29 +40,29 @@ void	free_map(t_map *map)
 	ft_memdel((void **)&map);
 }
 
-t_tetris	*new_tetris(char **pos, int width, int height, char value)
+t_tet	*new_tetris(char **pos, int width, int height, char value)
 {
-	t_tetris	*tetris;
+	t_tet	*tetris;
 
-	tetris = ft_memalloc(sizeof(t_tetris));
-	tetris->pos = pos;
+	tetris = ft_memalloc(sizeof(t_tet));
+	tetris->str = pos;
 	tetris->width = width;
 	tetris->height = height;
-	tetris->value = value;
+	tetris->alpha = value;
 	return (tetris);
 }
 
-void	free_tetris(t_tetris *tetris)
+void	free_tetris(t_tet *tetris)
 {
 	int	y;
 
 	y = 0;
 	while (y < tetris->height)
 	{
-		ft_memdel((void **)(&(tetris->pos[y])));
+		ft_memdel((void **)(&(tetris->str[y])));
 		y++;
 	}
-	ft_memdel((void **)(&(tetris->pos)));
+	ft_memdel((void **)(&(tetris->str)));
 	ft_memdel((void **)&tetris);
 }
 
