@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:59:55 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/19 01:48:56 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/19 01:58:21 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,4 @@ t_tet	*start_list(int num, char ***str)
 	}
 	curr->next = NULL;
 	return (new_list);
-}
-
-void	add_to_list(t_tet *alst, t_tet *new_list)
-{
-	if (new_list == NULL)
-		return ;
-	new_list->next = *alst;
-	*alst = new_list;
 }
