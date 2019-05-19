@@ -38,6 +38,7 @@ t_tet	*valid_input(char *str)
 t_tet	*save_if_valid(char **array)
 {
 	int		i;
+	int		j;
 	int		num;
 	char	***grps_of_4;
 	char	**temp;
@@ -45,25 +46,17 @@ t_tet	*save_if_valid(char **array)
 	i = 0; 
 	while (array[i])
 		i++;
-	grps_of_4 = (char ***)malloc(sizeof(char **) * (i / 4) + 1);
-	temp = (char **)malloc(sizeof(char *) * 4 + 1);
+	grps_of_4 = (char ***)malloc(sizeof(char **) * (i / 4));
+	temp = (char **)malloc(sizeof(char *) * 4);
 	num = i;
 	i = 0;
-	while (grps_of_4)
+	while (i < num)
 	{
-		while (temp)
-		{
-			*temp = array[i];
-			i++;
-			if (i % 4 == 0)
-				break;	
-			(*temp)++; // failing to increment pointers correctly probs
-		}
-		*grps_of_4 = temp;
+		j = 0;
+		while (j < 4)
+			temp[j++] = array[i++];
+		grps_of_4[i / 4] = temp;
 		i++;
-		if (i >= num)
-			break;
-		(*grps_of_4)++; // and this one
 	}
 	free (temp);
 	return (start_list(num, grps_of_4));
