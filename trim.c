@@ -87,7 +87,7 @@ int		left (char **map)
 	return (x);
 }
 
-char	**trim_edge (char **map)
+char	**trim (char **map)
 {
 	char	**tmp;
 	int		i;

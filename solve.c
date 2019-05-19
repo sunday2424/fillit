@@ -21,7 +21,7 @@ int		check_place(int i, int j, t_tet *tetris, t_map *map)
 	return (1);
 }
 
-int		put_piece(t_tet *tetris, t_map *map, t_position *position, char c)
+void	put_piece(t_tet *tetris, t_map *map, t_position *position, char c)
 {
 	int	x;
 	int	y;
@@ -79,7 +79,7 @@ t_map	*solve(t_tet *tetlst)
 	map = new_map(x);
 	while (rec_backtrack(map, tetlst))
 	{
-		free_map(&map);
+		free_map(map);
 		x++;
 		map = new_map(x);
 	}
