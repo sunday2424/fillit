@@ -40,9 +40,9 @@ typedef struct		s_tet
 	struct s_tet	*next;
 }					t_tet;
 
-t_tet				handle_input(char *file);
-t_tet				valid_input(char *str, t_tet *list);
-t_tet				save_if_valid(char **array, t_tet list);
+t_tet				*handle_input(char *file);
+t_tet				*valid_input(char *str);
+t_tet				*save_if_valid(char **array);
 int					ctbks(char **map);
 int					ccon(char **map);
 
@@ -60,7 +60,7 @@ t_position			*new_position(int x, int y);
 
 size_t				tet_lstcount(t_tet *list);
 void				tet_lstprev(t_tet **alst);
-t_tet				*start_list(int num);
+t_tet				*start_list(int num, char **buf);
 void				add_to_list(t_tet *alst, t_tet *new_list);
 
 int					check_place(int i, int j, t_tet *tetris, t_map *map);
