@@ -52,19 +52,22 @@ int		right (char **map)
 	x = 3;
 	while (x >= 0)
 	{
-		y = 3;
-		while (y >= 0)
+		y = 0;
+		while (y < 4)
 		{
 			if (map[y][x] == '#')
 				break ;
-			y--;
+			y++;
 		}
+		if (y == 4) //hacky!
+			y = 3;
 		if (map[y][x] == '#')
 			break ;
 		x--;
 	}
 	return (x);
 }
+
 int		left (char **map)
 {
 	int	x;
@@ -78,11 +81,11 @@ int		left (char **map)
 		{
 			if (map[y][x] == '#')
 				break ;
-			x++;
+			y++;
 		}
 		if (map[y][x] == '#')
 			break ;
-		y++;
+		x++;
 	}
 	return (x);
 }

@@ -40,26 +40,26 @@ t_tet	*save_if_valid(char **array)
 	int		i;
 	int		j;
 	int		num;
+	int		tetn;
 	char	***grps_of_4;
-	char	**temp;
 
 	i = 0; 
 	while (array[i])
 		i++;
 	grps_of_4 = (char ***)malloc(sizeof(char **) * (i / 4));
-	temp = (char **)malloc(sizeof(char *) * 4);
 	num = i;
 	i = 0;
 	while (i < num)
 	{
 		j = 0;
+		tetn = i / 4;
+		grps_of_4[tetn] = (char **)malloc(sizeof(char *) * 4);
 		while (j < 4)
-			temp[j++] = array[i++];
-		grps_of_4[i / 4] = temp;
-		i++;
+			grps_of_4[tetn][j++] = array[i++];
+		if (!(ctbks(grps_of_4[tetn]) && ccon(grps_of_4[tetn])))
+			print_error();
 	}
-	free (temp);
-	return (start_list(num, grps_of_4));
+	return (start_list(i, grps_of_4));
 }
 
 int		ctbks(char **map)
@@ -99,16 +99,19 @@ int		ccon(char **map)
 	while (y < 4)
 	{
 		x = 0;
-		while (x < 5)
+		while (x < 4)
 		{
-			if ((x + 1) < 5 && map[y][x + 1] == '#')
-				count++;
-			if ((x - 1) >= 0 && map[y][x - 1] == '#')
-				count++;
-			if ((y + 1) < 4 && map[y + 1][x] == '#')
-				count++;
-			if ((y - 1) >= 0 && map[y - 1][x] == '#')
-				count++;
+			if (map[y][x] == '#')
+			{
+				if ((x + 1) < 4 && map[y][x + 1] == '#')
+					count++;
+				if ((x - 1) >= 0 && map[y][x - 1] == '#')
+					count++;
+				if ((y + 1) < 4 && map[y + 1][x] == '#')
+					count++;
+				if ((y - 1) >= 0 && map[y - 1][x] == '#')
+					count++;
+			}
 			x++;
 		}
 		y++;
