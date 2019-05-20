@@ -57,6 +57,7 @@ t_tet	*start_list(int num, char ***str)
 
 	i = 0;
 	alpha = 'A';
+	ft_putnbr(num);
 	while (i < num)
 	{
 		if (alpha == 'A')
@@ -75,6 +76,7 @@ t_tet	*start_list(int num, char ***str)
 		i++;
 		alpha++;
 	}
+	ft_putnbr(i);
 	curr->next = NULL;
 	return (new_list);
 }

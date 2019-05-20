@@ -15,6 +15,8 @@ int		top (char **map)
 				break ;
 			x++;
 		}
+		if (y == 4)
+			y = 3;
 		if (map[y][x] == '#')
 			break ;
 		y++;
@@ -83,6 +85,8 @@ int		left (char **map)
 				break ;
 			y++;
 		}
+		if (y == 4)
+			y = 3;
 		if (map[y][x] == '#')
 			break ;
 		x++;
@@ -100,9 +104,9 @@ char	**trim (char **map)
 
 	y = 0;
 	j = top(map);
-	tmp = (char **)malloc(sizeof(char *) * (bottom(map) - top(map)) + 1);
-	tmp[bottom(map) - top(map)] = NULL;
-	while (y < (bottom(map) - top(map)))
+	tmp = (char **)malloc(sizeof(char *) * (bottom(map) - j) + 1);
+	tmp[bottom(map) - j] = NULL;
+	while (y < (bottom(map) - j))
 	{
 		x = 0;
 		i = left(map);
