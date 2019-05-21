@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 02:44:30 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/21 04:46:43 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/21 15:27:07 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	put_piece(t_tet *tetris, t_map *map, t_position *position, char c)
 		{
 			if (tetris->str[y][x] == '#')
 			{
-				if (map->size > position->y + y)
+				if (map->size >= position->y + y)
 				{
 					map->array[position->y + y][position->x + x] = c;
 				}
