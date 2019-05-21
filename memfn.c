@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 23:17:34 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/18 23:20:45 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/21 04:48:18 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_map	*new_map(int size)
 		i++;
 	}
 	map->array[i] = NULL;
-	printf("newmap ok\n");
 	return (map);
 }
 
@@ -51,7 +50,6 @@ void	free_map(t_map *map)
 	}
 	ft_memdel((void **)&(map->array));
 	ft_memdel((void **)&map);
-	printf("freemap ok\n");
 }
 
 t_tet	*new_tetris(char **str, int width, int height, char value)

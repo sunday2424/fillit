@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:30:14 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/19 01:45:19 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/21 04:47:03 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include "libft/libft.h"
 # define BUFF_SIZE 545
 

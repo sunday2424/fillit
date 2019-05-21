@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:56:28 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/18 23:01:54 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/21 04:48:52 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	print_map(t_map *map)
 		ft_putchar('\n');
 		i++;
 	}
-	printf("printmap ok\n");
-
 }
 
 int		main(int ac, char **av)

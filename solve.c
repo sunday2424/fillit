@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 02:44:30 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/21 04:37:44 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/21 04:46:43 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,12 @@ void	put_piece(t_tet *tetris, t_map *map, t_position *position, char c)
 	while (y < tetris->height)
 	{
 		x = 0;
-		printf("%d :y\n", y);
 		while (x < tetris->width)
 		{
-			printf("%d :x\n\n", x);
 			if (tetris->str[y][x] == '#')
 			{
 				if (map->size > position->y + y)
 				{
-					printf("setting up piece at x: %d y: %d\n", position->x + x, position->y + y);
 					map->array[position->y + y][position->x + x] = c;
 				}
 			}
@@ -67,11 +64,8 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 	int		y;
 	t_tet	*tetris;
 
-
-	printf("rec_back start\n");
-
 	if(!tetlst)
-		return(1);
+		return(0);
 	y = 0;
 	tetris = tetlst;
 	while (y <= (map->size - tetlst->height))
@@ -81,8 +75,8 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 		{
 			if (check_place(x, y, tetris, map))
 			{
-				if (rec_backtrack(map, tetlst->next))
-					return (1);
+				if (!rec_backtrack(map, tetlst->next))
+					return (0);
 				else
 					put_piece(tetris, map, new_position(x, y), '.');
 			}
@@ -90,8 +84,7 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 		}
 		y++;
 	}
-	printf("rec_back end\n");
-	return(0);
+	return (1);
 }
 
 t_map	*solve(t_tet *tetlst)
@@ -101,7 +94,7 @@ t_map	*solve(t_tet *tetlst)
 
 	x = 2;
 	map = new_map(x);
-	while (!rec_backtrack(map, tetlst))
+	while (rec_backtrack(map, tetlst))
 	{
 		free_map(map);
 		x++;
