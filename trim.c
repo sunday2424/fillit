@@ -104,15 +104,15 @@ char	**trim (char **map)
 
 	y = 0;
 	j = top(map);
-	tmp = (char **)malloc(sizeof(char *) * (bottom(map) - j) + 1);
-	tmp[bottom(map) - j] = NULL;
-	while (y < (bottom(map) - j))
+	tmp = (char **)malloc(sizeof(char *) * (bottom(map) - top(map) + 1) + 1);
+	tmp[bottom(map) - top(map) + 1] = NULL;
+	while (y < (bottom(map) - top(map) + 1))
 	{
 		x = 0;
 		i = left(map);
-		tmp[y] = (char *)malloc(sizeof(char) * (right(map) - left(map)) + 1);
-		tmp[y][right(map) - left(map)] = '\0';
-		while (x < (right(map) - left(map)))
+		tmp[y] = (char *)malloc(sizeof(char) * (right(map) - left(map) + 1) + 1);
+		tmp[y][right(map) - left(map) + 1] = '\0';
+		while (x < (right(map) - left(map) + 1))
 			tmp[y][x++] = map[j][i++];
 		y++;
 		j++;

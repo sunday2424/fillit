@@ -11,7 +11,7 @@ int		check_place(int i, int j, t_tet *tetris, t_map *map)
 		x = 0;
 		while (x < tetris->width)
 		{
-			if (tetris->str[x][y] == '#' && map->array[x+i][y+j] != '.')
+			if (tetris->str[y][x] == '#' && map->array[y+j][x+i] != '.')
 				return (0);
 			x++;
 		}
@@ -30,10 +30,18 @@ void	put_piece(t_tet *tetris, t_map *map, t_position *position, char c)
 	while (y < tetris->height)
 	{
 		x = 0;
+		printf("%d :y\n", y);
 		while (x < tetris->width)
 		{
-			if (tetris->str[x][y] == '#')
-				map->array[position->y + y][position->x + x] = c;
+			printf("%d :x\n\n", x);
+			if (tetris->str[y][x] == '#')
+			{
+				if (map->size > position->y + y)
+				{
+					printf("setting up piece at x: %d y: %d\n", position->x + x, position->y + y);
+					map->array[position->y + y][position->x + x] = c;
+				}
+			}
 			x++;
 		}
 		y++;
@@ -47,18 +55,21 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 	int		y;
 	t_tet	*tetris;
 
-	if(tetlst == NULL)
+
+	printf("rec_back start\n");
+
+	if(!tetlst)
 		return(0);
 	y = 0;
 	tetris = tetlst;
-	while (y < map->size - tetlst->height + 1)
+	while (y <= (map->size - tetlst->height))
 	{
 		x = 0;
-		while (x < map->size - tetlst->width + 1)
+		while (x <= (map->size - tetlst->width))
 		{
 			if (check_place(x, y, tetris, map))
 			{
-				if(rec_backtrack(map, tetlst->next))
+				if (rec_backtrack(map, tetlst->next))
 					return (0);
 				else
 					put_piece(tetris, map, new_position(x, y), '.');
@@ -67,6 +78,7 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 		}
 		y++;
 	}
+	printf("rec_back end\n");
 	return(1);
 }
 
@@ -75,7 +87,7 @@ t_map	*solve(t_tet *tetlst)
 	int		x;
 	t_map	*map;
 
-	x = 4;
+	x = 2;
 	map = new_map(x);
 	while (rec_backtrack(map, tetlst))
 	{

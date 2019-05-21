@@ -29,6 +29,8 @@ void	print_map(t_map *map)
 		ft_putchar('\n');
 		i++;
 	}
+	printf("printmap ok\n");
+
 }
 
 int		main(int ac, char **av)

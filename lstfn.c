@@ -6,16 +6,11 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:59:55 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/19 04:29:51 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/20 21:53:23 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-/*
-** list functions that are used but these were not
-** required functions from libft.
-*/
 
 size_t	tet_lstcount(t_tet *list)
 {
@@ -52,31 +47,29 @@ t_tet	*start_list(int num, char ***str)
 {
 	t_tet		*new_list;
 	t_tet		*curr;
+	int			w;
+	int			h;
 	int			i;
 	char		alpha;
 
-	i = 0;
+	i = -1;
 	alpha = 'A';
-	ft_putnbr(num);
-	while (i < num)
+	while (++i < (num / 4))
 	{
+		w = right(str[i]) - left(str[i]) + 1;
+		h = bottom(str[i]) - top(str[i]) + 1;
 		if (alpha == 'A')
 		{
-			new_list = new_tetris(trim(str[i]), (right(str[i]) - left(str[i])), \
-						(bottom(str[i]) - top(str[i])), alpha);
+			new_list = new_tetris(trim(str[i]), w, h, alpha);
 			curr = new_list;
 		}
 		else
 		{
-			curr->next = new_tetris(trim(str[i]), \
-					(right(str[i]) - left(str[i])), \
-						(bottom(str[i]) - top(str[i])), alpha);
+			curr->next = new_tetris(trim(str[i]), w, h, alpha);
 			curr = curr->next;
 		}
-		i++;
 		alpha++;
 	}
-	ft_putnbr(i);
 	curr->next = NULL;
 	return (new_list);
 }

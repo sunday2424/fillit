@@ -35,6 +35,7 @@ t_map	*new_map(int size)
 		i++;
 	}
 	map->array[i] = NULL;
+	printf("newmap ok\n");
 	return (map);
 }
 
@@ -50,6 +51,7 @@ void	free_map(t_map *map)
 	}
 	ft_memdel((void **)&(map->array));
 	ft_memdel((void **)&map);
+	printf("freemap ok\n");
 }
 
 t_tet	*new_tetris(char **str, int width, int height, char value)

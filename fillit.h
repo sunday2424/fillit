@@ -15,6 +15,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include "libft/libft.h"
 # define BUFF_SIZE 545
 
@@ -67,6 +68,7 @@ int					check_place(int i, int j, t_tet *tetris, t_map *map);
 void				put_piece(t_tet *tetris, t_map *map, t_position *position, char c);
 int					rec_backtrack(t_map *map, t_tet *tetlst);
 t_map				*solve(t_tet *tetlst);
+int					ft_sqrt(t_tet *tetlst);
 
 void				print_error(void);
 void				print_map(t_map *map);
