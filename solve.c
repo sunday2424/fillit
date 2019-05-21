@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solve.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/21 02:44:30 by atropnik          #+#    #+#             */
+/*   Updated: 2019/05/21 04:37:44 by atropnik         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 int		check_place(int i, int j, t_tet *tetris, t_map *map)
@@ -17,7 +29,7 @@ int		check_place(int i, int j, t_tet *tetris, t_map *map)
 		}
 		y++;
 	}
-	put_piece(tetris, map, new_position(x, y), tetris->alpha);
+	put_piece(tetris, map, new_position(i, j), tetris->alpha);
 	return (1);
 }
 
@@ -59,7 +71,7 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 	printf("rec_back start\n");
 
 	if(!tetlst)
-		return(0);
+		return(1);
 	y = 0;
 	tetris = tetlst;
 	while (y <= (map->size - tetlst->height))
@@ -70,7 +82,7 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 			if (check_place(x, y, tetris, map))
 			{
 				if (rec_backtrack(map, tetlst->next))
-					return (0);
+					return (1);
 				else
 					put_piece(tetris, map, new_position(x, y), '.');
 			}
@@ -79,7 +91,7 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 		y++;
 	}
 	printf("rec_back end\n");
-	return(1);
+	return(0);
 }
 
 t_map	*solve(t_tet *tetlst)
@@ -89,7 +101,7 @@ t_map	*solve(t_tet *tetlst)
 
 	x = 2;
 	map = new_map(x);
-	while (rec_backtrack(map, tetlst))
+	while (!rec_backtrack(map, tetlst))
 	{
 		free_map(map);
 		x++;
