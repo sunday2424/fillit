@@ -20,7 +20,7 @@ t_map	*new_map(int size)
 
 	map = (t_map *)ft_memalloc(sizeof(t_map));
 	map->size = size;
-	map->array = (char **)ft_memalloc(sizeof(char *) * size);
+	map->array = (char **)ft_memalloc(sizeof(char *) * size + 1);
 	i = 0;
 	while (i < size)
 	{
