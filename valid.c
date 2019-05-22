@@ -16,38 +16,62 @@ t_tet	*handle_input(char *file)
 {
 	int		fd;
 	char	str[BUFF_SIZE + 1];
+	char	*ptr;
 	int		bytesread;
+	int		n;
 
 	
 	fd = open(file, O_RDONLY);
 	bytesread = read(fd, str, BUFF_SIZE);
 	str[bytesread] = '\0';
-	return valid_input(str);
+	ptr = str;
+	n = 0;
+	while (*ptr != '\0')
+	{
+		if (*ptr == '\n')
+		{
+			n++;
+			if (((n + 1) % 5 == 0) && \
+					!(*(ptr + 1) == '\0' || *(ptr + 1) == '\n'))
+				print_error();
+		}
+		ptr++;
+	}
+	return valid_input(n, str);
 }
 
-t_tet	*valid_input(char *str)
+t_tet	*valid_input(int ns, char *str)
 {
 	char	**array;
+	int		i;
+	int		j;
 
 	if (!(array = ft_strsplit(str, '\n')))
 		return NULL;
-	else
-		return (save_if_valid(array));
+	i = 0;
+	while (array[i])
+	{
+		j = 0;
+		while (array[i][j])
+			j++;
+		if (j != 4)
+			print_error();
+		i++;
+	}
+	ns = ns - i;
+	if ((i % 4 != 0) || (!(((i + ns + 1) % 5) == 0) && i > 4))
+		print_error();
+	return (save_if_valid(i, array));
 }
 
-t_tet	*save_if_valid(char **array)
+t_tet	*save_if_valid(int num, char **array)
 {
 	int		i;
 	int		j;
-	int		num;
 	int		tetn;
 	char	***grps_of_4;
 
-	i = 0; 
-	while (array[i])
-		i++;
-	grps_of_4 = (char ***)malloc(sizeof(char **) * (i / 4));
-	num = i;
+	grps_of_4 = (char ***)malloc(sizeof(char **) * (num / 4));
 	i = 0;
 	while (i < num)
 	{
@@ -59,7 +83,7 @@ t_tet	*save_if_valid(char **array)
 		if (!(ctbks(grps_of_4[tetn]) && ccon(grps_of_4[tetn])))
 			print_error();
 	}
-	return (start_list(i, grps_of_4));
+	return (start_list(num, grps_of_4));
 }
 
 int		ctbks(char **map)

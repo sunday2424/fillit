@@ -41,8 +41,8 @@ typedef struct		s_tet
 }					t_tet;
 
 t_tet				*handle_input(char *file);
-t_tet				*valid_input(char *str);
-t_tet				*save_if_valid(char **array);
+t_tet				*valid_input(int ns, char *str);
+t_tet				*save_if_valid(int num, char **array);
 int					ctbks(char **map);
 int					ccon(char **map);
 

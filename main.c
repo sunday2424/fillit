@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:56:28 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/21 04:48:52 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/21 04:48:52 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,6 @@ void	print_map(t_map *map)
 	}
 }
 
-/*
-#include <stdio.h>
-void	print_lst(t_tet *list)
-{
-	int x;
-
-	x = 0;
-	printf("%d height\n", list->height);
-	printf("%d width\n", list->width);
-	while(list->str[x] != NULL)
-	{
-		ft_putstr(list->str[x]);
-		ft_putchar('\n');
-		x++;
-	}
-	ft_putchar('\n');
-	if(list->next != NULL)
-		print_lst(list->next);
-}
-*/
-
 int		main(int ac, char **av)
 {
 	t_tet	*list;
@@ -65,7 +44,6 @@ int		main(int ac, char **av)
 			print_error();
 			return (0);
 		}
-//		print_lst(list);
 		map = solve(list);
 		print_map(map);
 		free_map(map);
