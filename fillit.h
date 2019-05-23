@@ -64,8 +64,8 @@ t_tet				*start_list(int num, char ***str);
 void				add_to_list(t_tet *alst, t_tet *new_list);
 
 int					check_place(int i, int j, t_tet *tetris, t_map *map);
-void				put_piece(t_tet *tetris, t_map *map, 
-					\ t_position *position, char c);
+void				put_piece(t_tet *tetris, t_map *map, \
+					t_position *position, char c);
 int					rec_backtrack(t_map *map, t_tet *tetlst);
 t_map				*solve(t_tet *tetlst);
 int					ft_sqrt(t_tet *tetlst);

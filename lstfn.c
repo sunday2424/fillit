@@ -6,7 +6,7 @@
 /*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 08:59:55 by junpark           #+#    #+#             */
-/*   Updated: 2019/05/22 20:52:16 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/22 21:05:54 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_tet	*start_list(int num, char ***str)
 {
 	t_tet		*new_list;
 	t_tet		*curr;
-	int			w;
-	int			h;
 	int			i;
 	char		alpha;
 
@@ -38,16 +36,16 @@ t_tet	*start_list(int num, char ***str)
 	alpha = 'A';
 	while (++i < (num / 4))
 	{
-		w = right(str[i]) - left(str[i]) + 1;
-		h = bottom(str[i]) - top(str[i]) + 1;
 		if (alpha == 'A')
 		{
-			new_list = new_tetris(trim(str[i]), w, h, alpha);
+			new_list = new_tetris(trim(str[i]), (right(str[i]) - \
+			left(str[i]) + 1), (bottom(str[i]) - top(str[i])) + 1, alpha);
 			curr = new_list;
 		}
 		else
 		{
-			curr->next = new_tetris(trim(str[i]), w, h, alpha);
+			curr->next = new_tetris(trim(str[i]), (right(str[i]) - \
+			left(str[i]) + 1), (bottom(str[i]) - top(str[i]) + 1), alpha);
 			curr = curr->next;
 		}
 		alpha++;

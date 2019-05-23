@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-t_map	*new_map(int size)
+t_map		*new_map(int size)
 {
 	t_map	*map;
 	int		i;
@@ -38,7 +38,7 @@ t_map	*new_map(int size)
 	return (map);
 }
 
-void	free_map(t_map *map)
+void		free_map(t_map *map)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ void	free_map(t_map *map)
 	ft_memdel((void **)&map);
 }
 
-t_tet	*new_tetris(char **str, int width, int height, char value)
+t_tet		*new_tetris(char **str, int width, int height, char value)
 {
 	t_tet	*tetris;
 
@@ -64,7 +64,7 @@ t_tet	*new_tetris(char **str, int width, int height, char value)
 	return (tetris);
 }
 
-void	free_tetris(t_tet *tetris)
+void		free_tetris(t_tet *tetris)
 {
 	int	y;
 
