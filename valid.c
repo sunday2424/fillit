@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 22:45:52 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/19 04:29:48 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/22 20:13:37 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_tet	*handle_input(char *file)
 
 	
 	fd = open(file, O_RDONLY);
-	bytesread = read(fd, str, BUFF_SIZE);
+	if (!(bytesread = read(fd, str, BUFF_SIZE)))
+		print_error();
 	str[bytesread] = '\0';
 	ptr = str;
 	n = 0;
@@ -59,7 +60,8 @@ t_tet	*valid_input(int ns, char *str)
 		i++;
 	}
 	ns = ns - i;
-	if ((i % 4 != 0) || (!(((i + ns + 1) % 5) == 0) && i > 4))
+	if ((i % 4 != 0) || ns > i || \
+			(!(((i + ns + 1) % 5) == 0) && i > 4))
 		print_error();
 	return (save_if_valid(i, array));
 }
