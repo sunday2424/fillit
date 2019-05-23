@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 02:44:30 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/21 18:36:28 by junpark          ###   ########.fr       */
+/*   Updated: 2019/05/22 20:56:55 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		check_place(int i, int j, t_tet *tetris, t_map *map)
 		x = 0;
 		while (x < tetris->width)
 		{
-			if (tetris->str[y][x] == '#' && map->array[y+j][x+i] != '.')
+			if (tetris->str[y][x] == '#' && map->array[y + j][x + i] != '.')
 				return (0);
 			x++;
 		}
@@ -64,8 +64,8 @@ int		rec_backtrack(t_map *map, t_tet *tetlst)
 	int		y;
 	t_tet	*tetris;
 
-	if(!tetlst)
-		return(0);
+	if (!tetlst)
+		return (0);
 	y = 0;
 	tetris = tetlst;
 	while (y <= (map->size - tetlst->height))

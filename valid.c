@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 22:45:52 by atropnik          #+#    #+#             */
-/*   Updated: 2019/05/22 20:13:37 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/05/22 20:47:52 by junpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_tet	*handle_input(char *file)
 	int		bytesread;
 	int		n;
 
-	
 	fd = open(file, O_RDONLY);
 	if (!(bytesread = read(fd, str, BUFF_SIZE)))
 		print_error();
@@ -38,7 +37,7 @@ t_tet	*handle_input(char *file)
 		}
 		ptr++;
 	}
-	return valid_input(n, str);
+	return (valid_input(n, str));
 }
 
 t_tet	*valid_input(int ns, char *str)
@@ -48,7 +47,7 @@ t_tet	*valid_input(int ns, char *str)
 	int		j;
 
 	if (!(array = ft_strsplit(str, '\n')))
-		return NULL;
+		return (NULL);
 	i = 0;
 	while (array[i])
 	{
@@ -120,12 +119,12 @@ int		ccon(char **map)
 	int	y;
 	int	count;
 
-	y = 0;
+	y = -1;
 	count = 0;
-	while (y < 4)
+	while (++y < 4)
 	{
-		x = 0;
-		while (x < 4)
+		x = -1;
+		while (++x < 4)
 		{
 			if (map[y][x] == '#')
 			{
@@ -138,9 +137,7 @@ int		ccon(char **map)
 				if ((y - 1) >= 0 && map[y - 1][x] == '#')
 					count++;
 			}
-			x++;
 		}
-		y++;
 	}
 	return ((count == 6 || count == 8) ? 1 : 0);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   trim.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junpark <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/22 20:53:16 by junpark           #+#    #+#             */
+/*   Updated: 2019/05/22 20:54:50 by junpark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
-int		top (char **map)
+int		top(char **map)
 {
 	int	x;
 	int	y;
@@ -24,7 +36,7 @@ int		top (char **map)
 	return (y);
 }
 
-int		bottom (char **map)
+int		bottom(char **map)
 {
 	int	x;
 	int	y;
@@ -46,7 +58,7 @@ int		bottom (char **map)
 	return (y);
 }
 
-int		right (char **map)
+int		right(char **map)
 {
 	int	x;
 	int	y;
@@ -61,7 +73,7 @@ int		right (char **map)
 				break ;
 			y++;
 		}
-		if (y == 4) //hacky!
+		if (y == 4)
 			y = 3;
 		if (map[y][x] == '#')
 			break ;
@@ -70,7 +82,7 @@ int		right (char **map)
 	return (x);
 }
 
-int		left (char **map)
+int		left(char **map)
 {
 	int	x;
 	int	y;
@@ -94,7 +106,7 @@ int		left (char **map)
 	return (x);
 }
 
-char	**trim (char **map)
+char	**trim(char **map)
 {
 	char	**tmp;
 	int		i;
@@ -110,7 +122,8 @@ char	**trim (char **map)
 	{
 		x = 0;
 		i = left(map);
-		tmp[y] = (char *)malloc(sizeof(char) * (right(map) - left(map) + 1) + 1);
+		tmp[y] = (char *)malloc(sizeof(char) * (right(map) - \
+					left(map) + 1) + 1);
 		tmp[y][right(map) - left(map) + 1] = '\0';
 		while (x < (right(map) - left(map) + 1))
 			tmp[y][x++] = map[j][i++];
